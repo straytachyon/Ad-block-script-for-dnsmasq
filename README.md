@@ -7,10 +7,11 @@ sudo apt-get dist-upgrade
 sudo apt-get install dnsmasq
 
 Copy the raw script "dnsmasq_ad_list.sh" to /usr/local/bin
+"sudo cp dnsmasq_ad_list.sh /usr/local/bin"
 
 https://raw.githubusercontent.com/straytachyon/dnsmasq_ad_block_script/master/dnsmasq_ad_list.sh
 
-Run "chmod +x /usr/local/bin/dnsmasq_ad_list.sh" to make the script executable
+Run "sudo chmod +x /usr/local/bin/dnsmasq_ad_list.sh" to make the script executable
 
 Run the script using root priviledge: "sudo /usr/local/bin/dnsmasq_ad_list.sh".  The script will generates a file: /etc/dnsmasq.d/dnsmasq.adlist.conf
 
