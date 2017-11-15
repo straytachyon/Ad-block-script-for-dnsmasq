@@ -6,7 +6,7 @@ sudo apt-get update
 sudo apt-get dist-upgrade
 sudo apt-get install dnsmasq
 
-Copy the raw script "dnsmasq_ad_list.sh" to /usr/local/bin
+Copy the raw script "dnsmasq_ad_list.sh" to /usr/local/bin with the command: 
 "sudo cp dnsmasq_ad_list.sh /usr/local/bin"
 
 https://raw.githubusercontent.com/straytachyon/dnsmasq_ad_block_script/master/dnsmasq_ad_list.sh
