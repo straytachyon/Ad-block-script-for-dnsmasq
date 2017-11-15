@@ -1,4 +1,4 @@
-# Ad block script for Dnsmasq
+# Ad block script for dnsmasq
 A script to generate dnsmasq conf files to block ad and trackers
 
 Install Dnsmasq using the following two commands:
