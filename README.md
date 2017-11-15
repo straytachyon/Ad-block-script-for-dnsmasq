@@ -1,7 +1,7 @@
 # Ad block script for dnsmasq
 A script to generate dnsmasq conf files to block ad and trackers
 
-Install dnsmasq using the following two commands:
+Install dnsmasq using the following commands:
 
 "sudo apt-get update"
 
