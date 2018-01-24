@@ -38,6 +38,22 @@ temp_ad_file="/tmp/dnsmasq.adlist.conf.tmp"
 curl $ad_list_url | sed "s/127\.0\.0\.1/$invalid_ip/" > $temp_ad_file
 
 #remove all lines that do not start with "||"
+#remove all lines with "^$image"
+#remove all lines with "/"
+#remove all lines with ".$image"
+#remove all lines with ".$popup"
+#remove all lines with "domain="
+#remove all lines with ".$third-party"
+#remove all lines with "[a-z]*."
+#remove all lines with "^*-sponsor"
+#remove all lines with "^*_sponsor"
+#remove all lines with ".*"
+#remove all lines with ".*"
+#remove all characters after "^", including the "^"
+#remove all characters after "*", including the "*"
+#remove all lines with ip addresses
+#remove all "||"
+#remove all "meetrics.netbb-"
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 curl $easy_list_url | sed  -e '/^||/!d' -e '/\//d' -e '/\^\$image/d' -e '/\//d' -e '/\.\$image/d' -e '/\.\$popup/d' -e '/domain\=/d' -e '/\.\$third-party/d' -e '/[a-z]\*\./d' -e "/\^\*-sponsor/d" -e "/\^\*\_sponsor/d" -e '/\.\*/d' -e 's/\^.*//' -e 's/\*.*//'  -e 's/||//' -e '/^meetrics.netbb-/d' -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/" | awk '!seen[$0]++' >> $temp_ad_file
