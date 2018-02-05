@@ -18,6 +18,8 @@ winhelp_list_url="http://winhelp2002.mvps.org/hosts.txt"
 notrack_list_url="https://raw.githubusercontent.com/quidsup/notrack/master/trackers.txt"
 notrack_malware_list_url="https://raw.githubusercontent.com/quidsup/notrack/master/malicious-sites.txt"
 
+malwaredomainlist="http://www.malwaredomainlist.com/hostslist/hosts.txt"
+
 #pixelserv_ip="192.168.0.120"
 #localhost_ip=ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'
 #localhost_ip="10.8.0.1"
@@ -98,6 +100,8 @@ curl $notrack_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/^/address=\//' -e "s/
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 curl $notrack_malware_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" >> $temp_ad_file
+
+curl $malwaredomainlist | sed -e '/^#/d' -e 's/127\.0\.0\.1\  //g' -e 's/^/address=\//' -e "s/.$/\/$localhost_ip/"  >> $temp_ad_file
 
 if [ -f "$temp_ad_file" ]
 then
