@@ -121,17 +121,17 @@ echo "Processing Malware Domain List: " $malwaredomainlist
 curl $malwaredomainlist | sed -e '/^#/d' -e 's/127\.0\.0\.1\  //g' -e 's/^/address=\//' -e "s/.$/\/$localhost_ip/"  >> $temp_ad_file
 
 #remove all lines start with "#"
-#remove empty lines
 #remove lines with "localhost"
 #remove lines with "braodcasthost"
 #remove lines with "local"
 #remove "127.0.0.1 "
 #remove all characters after "#", including the #
 #remove empty space at the end of the line
+#remove empty lines
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Dan's List: " $danlist
-curl $danlist | sed -e '/^#/d' -e '/^$/d' -e '/localhost/d' -e '/broadcasthost/d' -e '/local/d' -e 's/127\.0\.0\.1\ //g' -e 's/#.*//' -e 's/\s*$//' -e 's/^/address=\//' -e "s/.$/\/$localhost_ip/"  >> $temp_ad_file
+curl $danlist | sed -e '/^#/d' -e '/^$/d' -e '/localhost/d' -e '/broadcasthost/d' -e '/local/d' -e 's/127\.0\.0\.1\ //g' -e 's/#.*//' -e 's/\s*$//' -e '/^$/d' -e 's/^/address=\//' -e "s/.$/\/$localhost_ip/"  >> $temp_ad_file
 
 if [ -f "$temp_ad_file" ]
 then
