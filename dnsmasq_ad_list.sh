@@ -27,7 +27,7 @@ danlist="http://someonewhocares.org/hosts/hosts"
 #localhost_ip="10.8.0.1"
 localhost_ip="0.0.0.0"
 invalid_ip="0.0.0.0"
-#localhost_ip="$(ifconfig | grep -A 1 'venet0:0' | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)"
+#localhost_ip="$(ifconfig | grep -A 1 'venet0' | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)"
 ad_file="/etc/dnsmasq.d/dnsmasq.adlist.conf"
 temp_ad_file="/tmp/dnsmasq.adlist.conf.tmp"
 
@@ -61,32 +61,32 @@ curl $ad_list_url | sed "s/127\.0\.0\.1/$invalid_ip/" > $temp_ad_file
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Easy List: " $easy_list_url
-curl $easy_list_url | sed  -e '/^||/!d' -e '/\//d' -e '/\^\$image/d' -e '/\//d' -e '/\.\$image/d' -e '/\.\$popup/d' -e '/domain\=/d' -e '/\.\$third-party/d' -e '/[a-z]\*\./d' -e "/\^\*-sponsor/d" -e "/\^\*\_sponsor/d" -e '/\.\*/d' -e 's/\^.*//' -e 's/\*.*//'  -e 's/||//' -e '/^meetrics.netbb-/d' -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/" | awk '!seen[$0]++' >> $temp_ad_file
+curl $easy_list_url | sed  -e '/^||/!d' -e '/\//d' -e '/\^\$image/d' -e '/\//d' -e '/\.\$image/d' -e '/\.\$popup/d' -e '/domain\=/d' -e '/\.\$third-party/d' -e '/[a-z]\*\./d' -e "/\^\*-sponsor/d" -e "/\^\*\_sponsor/d" -e '/\.\*/d' -e 's/\^.*//' -e 's/\*.*//'  -e 's/||//' -e '/^meetrics.netbb-/d' -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e '/^$/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/" | awk '!seen[$0]++' >> $temp_ad_file
 
 #remove all lines that do not start with "||"
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Easy China List: " $easy_china_list_url
-curl $easy_china_list_url | sed  -e '/^||/!d' -e '/\//d' -e '/\^\$image/d' -e '/\//d' -e '/\.\$image/d' -e '/\.\$popup/d' -e '/domain\=/d' -e '/\.\$third-party/d' -e '/[a-z]\*\./d' -e "/\^\*-sponsor/d" -e "/\^\*\_sponsor/d" -e '/\.\*/d' -e 's/\^.*//' -e 's/\*.*//'  -e 's/||//' -e '/^meetrics.netbb-/d' -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/" | awk '!seen[$0]++' >> $temp_ad_file
+curl $easy_china_list_url | sed  -e '/^||/!d' -e '/\//d' -e '/\^\$image/d' -e '/\//d' -e '/\.\$image/d' -e '/\.\$popup/d' -e '/domain\=/d' -e '/\.\$third-party/d' -e '/[a-z]\*\./d' -e "/\^\*-sponsor/d" -e "/\^\*\_sponsor/d" -e '/\.\*/d' -e 's/\^.*//' -e 's/\*.*//'  -e 's/||//' -e '/^meetrics.netbb-/d' -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e '/^$/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/" | awk '!seen[$0]++' >> $temp_ad_file
 
 #remove all lines that do not start with "||"
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Easy Privacy List: " $easy_privacy_list_url
-curl $easy_privacy_list_url | sed -e '/^||/!d' -e '/\//d' -e '/\^\$image/d' -e '/\//d' -e '/\.\$image/d' -e '/\.\$popup/d' -e '/domain\=/d' -e '/\.\$third-party/d' -e '/\*\./d' -e '/\.\*/d' -e "/\^\*-sponsor/d" -e "/\^\*\_sponsor/d" -e 's/\^.*//' -e 's/\*.*//'  -e 's/||//' -e '/^meetrics.netbb-/d' -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/" | awk '!seen[$0]++' >> $temp_ad_file
+curl $easy_privacy_list_url | sed -e '/^||/!d' -e '/\//d' -e '/\^\$image/d' -e '/\//d' -e '/\.\$image/d' -e '/\.\$popup/d' -e '/domain\=/d' -e '/\.\$third-party/d' -e '/\*\./d' -e '/\.\*/d' -e "/\^\*-sponsor/d" -e "/\^\*\_sponsor/d" -e 's/\^.*//' -e 's/\*.*//'  -e 's/||//' -e '/^meetrics.netbb-/d' -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e '/^$/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/" | awk '!seen[$0]++' >> $temp_ad_file
 
 #remove ip addresses
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Easy Malware List: " $easy_malware_list_url
-curl $easy_malware_list_url | gunzip -c |  sed -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e '/\/\//d' -e "s/zone \"//"  -e 's/\".*//'  -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  | awk '!seen[$0]++' >> $temp_ad_file
+curl $easy_malware_list_url | gunzip -c |  sed -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e '/\/\//d' -e "s/zone \"//"  -e 's/\".*//' -e '/^$/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  | awk '!seen[$0]++' >> $temp_ad_file
 
 #tar extract from the downloaded archive BL/tracker/domains BL/spyware/domains BL/adv/domains files
 #remove ip addresses
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Shalla List: " $shalla_list_url
-curl $shalla_list_url | tar -zOxvf - BL/tracker/domains BL/spyware/domains BL/adv/domains | sed -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  | awk '!seen[$0]++' >> $temp_ad_file
+curl $shalla_list_url | tar -zOxvf - BL/tracker/domains BL/spyware/domains BL/adv/domains | sed -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e '/^$/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  | awk '!seen[$0]++' >> $temp_ad_file
 
 #remove all lines that don't start with 0
 #remove all lines start with "#"
@@ -95,7 +95,7 @@ curl $shalla_list_url | tar -zOxvf - BL/tracker/domains BL/spyware/domains BL/ad
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Winhelp List: " $winhelp_list_url
-curl $winhelp_list_url | sed -e '/^0/!d' -e '/^#/d' -e 's/#.*//' -e 's/0\.0\.0\.0\ //g' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" | awk '!seen[$0]++' >> $temp_ad_file
+curl $winhelp_list_url | sed -e '/^0/!d' -e '/^#/d' -e 's/#.*//' -e 's/0\.0\.0\.0\ //g' -e '/^$/d' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" | awk '!seen[$0]++' >> $temp_ad_file
 
 #remove all lines start with "#"
 #remove all characters after "#", including the #
@@ -103,7 +103,7 @@ curl $winhelp_list_url | sed -e '/^0/!d' -e '/^#/d' -e 's/#.*//' -e 's/0\.0\.0\.
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Notrack List: " $notrack_list_url
-curl $notrack_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/\s*$//' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" >> $temp_ad_file
+curl $notrack_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/\s*$//' -e '/^$/d' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" >> $temp_ad_file
 
 #remove all lines start with "#"
 #remove all characters after "#", including the #
@@ -111,14 +111,14 @@ curl $notrack_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/\s*$//' -e 's/^/addre
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Notrack Malware List: " $notrack_malware_list_url
-curl $notrack_malware_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/\s*$//' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" >> $temp_ad_file
+curl $notrack_malware_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/\s*$// -e '/^$/d'' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" >> $temp_ad_file
 
 #remove all lines start with "#"
 #remove all "127.0.0.1  "
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Malware Domain List: " $malwaredomainlist
-curl $malwaredomainlist | sed -e '/^#/d' -e 's/127\.0\.0\.1\  //g' -e 's/^/address=\//' -e "s/.$/\/$localhost_ip/"  >> $temp_ad_file
+curl $malwaredomainlist | sed -e '/^#/d' -e 's/127\.0\.0\.1\  //g' -e '/^$/d' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/"  >> $temp_ad_file
 
 #remove all lines start with "#"
 #remove lines with "localhost"
@@ -131,7 +131,7 @@ curl $malwaredomainlist | sed -e '/^#/d' -e 's/127\.0\.0\.1\  //g' -e 's/^/addre
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Dan's List: " $danlist
-curl $danlist | sed -e '/^#/d' -e '/^$/d' -e '/localhost/d' -e '/broadcasthost/d' -e '/local/d' -e 's/127\.0\.0\.1\ //g' -e 's/#.*//' -e 's/\s*$//' -e '/^$/d' -e 's/^/address=\//' -e "s/.$/\/$localhost_ip/"  >> $temp_ad_file
+curl $danlist | sed -e '/^#/d' -e '/^$/d' -e '/localhost/d' -e '/broadcasthost/d' -e '/local/d' -e 's/127\.0\.0\.1\ //g' -e 's/#.*//' -e 's/\s*$//' -e '/^$/d' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/"  >> $temp_ad_file
 
 if [ -f "$temp_ad_file" ]
 then
