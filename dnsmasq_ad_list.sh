@@ -20,6 +20,8 @@ notrack_malware_list_url="https://raw.githubusercontent.com/quidsup/notrack/mast
 
 malwaredomainlist="http://www.malwaredomainlist.com/hostslist/hosts.txt"
 
+danlist="http://someonewhocares.org/hosts/"
+
 #pixelserv_ip="192.168.0.120"
 #localhost_ip=ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'
 #localhost_ip="10.8.0.1"
@@ -101,7 +103,16 @@ curl $notrack_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/^/address=\//' -e "s/
 #add "/0.0.0.0" to the end
 curl $notrack_malware_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" >> $temp_ad_file
 
+#remove all lines start with "#"
+#add "/address=" in front
+#add "/0.0.0.0" to the end
 curl $malwaredomainlist | sed -e '/^#/d' -e 's/127\.0\.0\.1\  //g' -e 's/^/address=\//' -e "s/.$/\/$localhost_ip/"  >> $temp_ad_file
+
+#remove all lines start with "#"
+#remove all characters after "#", including the #
+#add "/address=" in front
+#add "/0.0.0.0" to the end
+curl $danlist | sed -e '/^#/d' -e 's/127\.0\.0\.1\  //g' -e 's/^/address=\//' -e 's/#.*//' -e "s/.$/\/$localhost_ip/"  >> $temp_ad_file
 
 if [ -f "$temp_ad_file" ]
 then
