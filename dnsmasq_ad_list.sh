@@ -22,6 +22,8 @@ malwaredomainlist="http://www.malwaredomainlist.com/hostslist/hosts.txt"
 
 danlist="http://someonewhocares.org/hosts/hosts"
 
+youtubedomains="https://api.hackertarget.com/hostsearch/?q=googlevideo.com"
+
 #pixelserv_ip="192.168.0.120"
 #localhost_ip=ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'
 #localhost_ip="10.8.0.1"
@@ -131,7 +133,10 @@ curl $malwaredomainlist | sed -e '/^#/d' -e 's/127\.0\.0\.1\  //g' -e '/^$/d' -e
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Dan's List: " $danlist
-curl $danlist | sed -e '/^#/d' -e '/^$/d' -e '/localhost/d' -e '/broadcasthost/d' -e '/local/d' -e 's/127\.0\.0\.1\ //g' -e 's/#.*//' -e 's/\s*$//' -e '/^$/d' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/"  >> $temp_ad_file
+curl $danlist | sed -e '/^#/d' -e '/^$/d' -e '/localhost/d' -e '/broadcasthost/d' -e '/local/d' -e 's/127\.0\.0\.1\ //g' -e 's/#.*//' -e 's/\s*$//' -e '/^$/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  >> $temp_ad_file
+
+echo "Processing youtube domains: " $youtubedomains
+curl $youtubedomains  | awk -F, 'NR>1 {print $1}' | sed -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  >> $temp_ad_file
 
 if [ -f "$temp_ad_file" ]
 then
