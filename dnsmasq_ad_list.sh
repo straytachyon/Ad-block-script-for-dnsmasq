@@ -135,8 +135,8 @@ curl $malwaredomainlist | sed -e '/^#/d' -e 's/127\.0\.0\.1\  //g' -e '/^$/d' -e
 echo "Processing Dan's List: " $danlist
 curl $danlist | sed -e '/^#/d' -e '/^$/d' -e '/localhost/d' -e '/broadcasthost/d' -e '/local/d' -e 's/127\.0\.0\.1\ //g' -e 's/#.*//' -e 's/\s*$//' -e '/^$/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  >> $temp_ad_file
 
-echo "Processing youtube domains: " $youtubedomains
-curl $youtubedomains  | awk -F, 'NR>1 {print $1}' | sed -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  >> $temp_ad_file
+#echo "Processing youtube domains: " $youtubedomains
+#curl $youtubedomains  | awk -F, 'NR>1 {print $1}' | sed -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  >> $temp_ad_file
 
 if [ -f "$temp_ad_file" ]
 then
