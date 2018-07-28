@@ -113,7 +113,7 @@ curl $notrack_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/\s*$//' -e '/^$/d' -e
 #add "/address=" in front
 #add "/0.0.0.0" to the end
 echo "Processing Notrack Malware List: " $notrack_malware_list_url
-curl $notrack_malware_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/\s*$// -e '/^$/d'' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" >> $temp_ad_file
+curl $notrack_malware_list_url | sed -e '/^#/d' -e 's/#.*//' -e 's/\s*$//' -e '/^$/d' -e 's/^/address=\//' -e "s/.$/\/$invalid_ip/" >> $temp_ad_file
 
 #remove all lines start with "#"
 #remove all "127.0.0.1  "
