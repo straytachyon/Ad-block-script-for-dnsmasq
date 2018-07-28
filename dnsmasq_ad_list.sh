@@ -20,7 +20,7 @@ notrack_malware_list_url="https://raw.githubusercontent.com/quidsup/notrack/mast
 
 malwaredomainlist="http://www.malwaredomainlist.com/hostslist/hosts.txt"
 
-danlist="http://someonewhocares.org/hosts/hosts"
+danlist="https://someonewhocares.org/hosts/hosts"
 
 youtubedomains="https://api.hackertarget.com/hostsearch/?q=googlevideo.com"
 
