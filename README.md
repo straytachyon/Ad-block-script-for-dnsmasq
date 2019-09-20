@@ -18,6 +18,8 @@ Run "sudo chmod +x /usr/local/bin/dnsmasq_ad_list.sh" to make the script executa
 
 Run the script using root priviledge: "sudo /usr/local/bin/dnsmasq_ad_list.sh".  The script will generates a file: /etc/dnsmasq.d/dnsmasq.adlist.conf
 
+Restart the Dnsmasq service by running "sudo service dnsmasq restart"
+
 Test the setup by running "nslookup doubleclick.com <dnsmasq ip>".  The correct output should be 0.0.0.0
 
 Optional: rename the existing /etc/dnsmasq.conf and copy my config file "dnsmasq.conf" to /etc/
