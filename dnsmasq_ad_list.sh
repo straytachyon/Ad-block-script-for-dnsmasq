@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ad_list_url="http://pgl.yoyo.org/adservers/serverlist.php?hostformat=dnsmasq&showintro=0&mimetype=plaintext"
+ad_list_url="https://pgl.yoyo.org/adservers/serverlist.php?hostformat=dnsmasq&showintro=0&mimetype=plaintext"
 
 #easy_list_url="https://easylist-downloads.adblockplus.org/easylist.txt"
 #easy_list_url="https://easylist-downloads.adblockplus.org/chinalist+easylist.txt"
