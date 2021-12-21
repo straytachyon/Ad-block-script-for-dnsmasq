@@ -13,7 +13,7 @@ easy_privacy_list_url="https://easylist.github.io/easylist/easyprivacy.txt"
 easy_malware_list_url="http://malware-domains.com/files/spywaredomains.zones.zip"
 
 shalla_list_url="http://www.shallalist.de/Downloads/shallalist.tar.gz"
-winhelp_list_url="http://winhelp2002.mvps.org/hosts.txt"
+winhelp_list_url="https://winhelp2002.mvps.org/hosts.txt"
 
 notrack_list_url="https://raw.githubusercontent.com/quidsup/notrack/master/trackers.txt"
 notrack_malware_list_url="https://raw.githubusercontent.com/quidsup/notrack/master/malicious-sites.txt"
@@ -80,8 +80,8 @@ curl -k $easy_privacy_list_url | sed -e '/^||/!d' -e '/\//d' -e '/\^\$image/d' -
 #remove ip addresses
 #add "/address=" in front
 #add "/0.0.0.0" to the end
-echo "Processing Easy Malware List: " $easy_malware_list_url
-curl -k $easy_malware_list_url | gunzip -c |  sed -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e '/\/\//d' -e "s/zone \"//"  -e 's/\".*//' -e '/^$/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  | awk '!seen[$0]++' >> $temp_ad_file
+#echo "Processing Easy Malware List: " $easy_malware_list_url
+#curl -k $easy_malware_list_url | gunzip -c |  sed -e '/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/d' -e '/\/\//d' -e "s/zone \"//"  -e 's/\".*//' -e '/^$/d' -e 's/^/address=\//' -e "s/$/\/$invalid_ip/"  | awk '!seen[$0]++' >> $temp_ad_file
 
 #tar extract from the downloaded archive BL/tracker/domains BL/spyware/domains BL/adv/domains files
 #remove ip addresses
